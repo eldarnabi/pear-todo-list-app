@@ -11,7 +11,7 @@ export const addSubTodo = (req, res) => {
       return res.status(404).json({ error: "Task not found" });
     }
 
-    todos.subTasks.unshift({ ...req.body });
+    todo.subTasks.unshift({ ...req.body });
     saveDbFile(todos);
     return res.status(201).json({ message: "Subtask added successfully" });
   } catch (error) {
