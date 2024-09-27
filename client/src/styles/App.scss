@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+
+/* Reset and Base Styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'Abel', sans-serif;
+}
+
+body {
+  display: flex;
+  font-size: 18px;
+  justify-content: center;
+  background-image: linear-gradient(#6c5959, #3a6fb5);
+  color: #ffffff;
+  transition: 0.3s linear;
+  overflow: hidden;
+}
+
+h1 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  font-size: 3rem;
+  width: 100%;
+}
+
+.App {
+  width: 600px;
+  padding: 30px;
+  text-align: center;
+
+  @media (max-width: 800px) {
+    width: 90%;
+  }
+
+  .todo-list {
+    margin: 20px auto;
+    width: 100%;
+    text-align: left;
+  }
+
+  .todo-item {
+    padding: 15px 20px;
+    display: flex;
+    flex-direction: column;
+
+    &.priority {
+      background-color: #b5382279;
+    }
+
+    &.sub-task {
+      margin-left: 20px;
+      border-left: none;
+      border-bottom: none;
+      color: #ffffff;
+    }
+
+    .completed {
+      text-decoration: line-through;
+      color: #999;
+    }
+
+    .todo-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      input[type='checkbox'] {
+        margin-right: 10px;
+      }
+
+      span {
+        flex: 1;
+        word-break: break-word;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 10px;
+      }
+
+      button {
+        padding: 8px;
+        border: none;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 1rem;
+
+        &.delete-button {
+          background-color: #c0392b;
+          color: #fff;
+
+          &:hover {
+            background-color: #a93226;
+          }
+        }
+
+        &:not(.delete-button) {
+          background-color: #3498db30;
+          color: #ededed;
+
+          &:hover {
+            background-color: #044977;
+          }
+        }
+
+        &:focus {
+          outline: 2px solid rgba(52, 152, 219, 0.5);
+        }
+      }
+    }
+
+    .subtasks {
+      margin-left: 20px;
+      border-left: 2px solid #f9f6f6;
+      padding-left: 10px;
+    }
+  }
+
+  form {
+    margin: 20px auto;
+    width: 100%;
+    display: block;
+
+    .form-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+
+      @media (max-width: 600px) {
+        flex-direction: column;
+      }
+    }
+
+    .error-message {
+      color: red;
+      font-size: 0.9em;
+      margin-top: 10px;
+      padding: 10px;
+    }
+
+    input {
+      flex: 1;
+      padding: 10px;
+      background-color: #032f4d29;
+      border: none;
+      border-radius: 35px;
+      color: #ffffff;
+    }
+
+    button {
+      padding: 10px 15px;
+      margin-left: 15px;
+      background-image: linear-gradient(#441414, #3a6fb5);
+      color: #fbfbfb;
+      border: none;
+      border-radius: 35px;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: background-color 0.3s ease, transform 0.1s ease, box-shadow 0.1s ease;
+
+      &:active {
+        transform: scale(0.95);
+        box-shadow: 0 3px #666;
+        background-image: linear-gradient(#4a515a, #dd1818);
+      }
+    }
+
+    @media (max-width: 600px) {
+      input,
+      button {
+        width: 100%;
+        margin-left: 0;
+      }
+
+      button {
+        margin-top: 10px;
+      }
+    }
+  }
+}
