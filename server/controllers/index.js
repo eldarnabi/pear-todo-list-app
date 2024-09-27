@@ -1,6 +1,5 @@
-import { todoController} from './todoController/todoController.js';
-
+import { todoController } from "./todoController/todoController.js";
 
 export const appController = () => ({
-    todoController: todoController(),
-}); 
+  todoController: todoController(),
+});

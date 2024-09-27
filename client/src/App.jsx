@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import TodoList from './components/TodoList.jsx';
-import AddTodoForm from './components/AddTodoForm.jsx';
-import { fetchTodos } from './api/todo';
-import './styles/App.scss';
+import { useState, useEffect } from "react";
+import { TodoList } from "./components/TodoList.jsx";
+import { TodoForm } from "./components/TodoForm.jsx";
+import { fetchTodos } from "./api/todo";
+import "./styles/App.scss";
 
-function App() {
+export const App = () => {
   const [todos, setTodos] = useState([]);
 
   useEffect(() => {
@@ -14,14 +14,13 @@ function App() {
     fetchTodos(signal)
       .then((response) => setTodos(response.data))
       .catch((error) => {
-          console.error('Fetch todos error:', error);
+        console.error("Fetch todos error:", error);
       });
     return () => {
       controller.abort();
     };
   }, []);
 
-  // Function to sort todos based on priority and taskStatus (both are date-time strings)
   const sortTodos = (todos) => {
     console.log(todos);
     return [...todos].sort((a, b) => {
@@ -41,10 +40,8 @@ function App() {
   return (
     <div className="App">
       <h1>PEAR Health Labs</h1>
-      <AddTodoForm setTodos={setTodos} />
+      <TodoForm setTodos={setTodos} />
       <TodoList todos={sortTodos(todos)} setTodos={setTodos} />
     </div>
   );
-}
-
-export default App;
+};

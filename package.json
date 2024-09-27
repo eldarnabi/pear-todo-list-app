@@ -6,21 +6,27 @@
   "type": "module",
   "scripts": {
     "start": "node app.js",
-    "dev": "nodemon app.js"
+    "dev": "nodemon app.js",
+    "lint": "eslint . --report-unused-disable-directives --max-warnings 0"
   },
   "engines": {
     "node": ">=18.17.1"
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "eslint": "^9.11.1",
     "express": "^4.21.0",
     "express-validator": "^7.2.0",
     "fs": "^0.0.1-security",
-    "prettier": "^3.3.3",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "@eslint/js": "^9.11.1",
+    "eslint": "^9.11.1",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-prettier": "^5.2.1",
+    "eslint-plugin-react": "^7.37.0",
+    "globals": "^15.9.0",
+    "nodemon": "^2.0.19",
+    "prettier": "^3.3.3"
   }
 }

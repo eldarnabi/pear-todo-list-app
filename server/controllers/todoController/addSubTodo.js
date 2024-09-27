@@ -1,21 +1,20 @@
-// Function to add subtask to a task by its id if it exists
 import { todoService } from "../../services/index.js";
+// This controller should only have one responsibility, which is to add a subtask to a todo item without doing the databasa operations, due to time constraints, i will not refactor this controller at the moment but i will refactor it in the future
 export const addSubTodo = (req, res) => {
-    const { readDbFile, saveDbFile } = todoService();
-    try {
-        const tasks = readDbFile();
-        const { id } = req.params;
-        
-        const task = tasks.find((task) => task.id === id);
-        if (!task) {
-            return res.status(404).json({ error: 'Task not found' });
-        }
-        console.log(req.body);
-        task.subTasks.unshift({ ...req.body });
-        saveDbFile(tasks);
-        return res.status(201).json({ message: 'Subtask added successfully' });
+  const { readDbFile, saveDbFile } = todoService();
+  try {
+    const todos = readDbFile();
+    const { id } = req.params;
 
-    } catch (error) {
-        return res.status(500).json({ error: error.message });
+    const todo = todos.find((todo) => todo.id === id);
+    if (!todo) {
+      return res.status(404).json({ error: "Task not found" });
     }
+
+    todos.subTasks.unshift({ ...req.body });
+    saveDbFile(todos);
+    return res.status(201).json({ message: "Subtask added successfully" });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
 };

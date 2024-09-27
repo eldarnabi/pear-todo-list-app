@@ -1,10 +1,9 @@
-// src/components/AddTodoForm.jsx
-import React, { useState, useEffect } from 'react';
-import { addTodo } from '../api/todo';
-import {FaPlus } from 'react-icons/fa';
+import { useState, useEffect } from "react";
+import { addTodo } from "../api/todo";
+import { FaPlus } from "react-icons/fa";
 
-function AddTodoForm({ setTodos }) {
-  const [taskName, setTaskName] = useState('');
+export const TodoForm = ({ setTodos }) => {
+  const [taskName, setTaskName] = useState("");
   const [error, setError] = useState(null);
 
   const handleAddTodo = async (e) => {
@@ -14,16 +13,22 @@ function AddTodoForm({ setTodos }) {
     };
 
     try {
-      const createdTodo = await addTodo(newTodo); // Await the created todo from the backend
-      setTodos((prevTodos) => [createdTodo.data, ...prevTodos]); // Use the complete todo object
-      setTaskName('');
-      setError(null); // Clear any previous error
+      const createdTodo = await addTodo(newTodo);
+      setTodos((prevTodos) => {
+        setTaskName("");
+        setError(null);
+        return [createdTodo.data, ...prevTodos];
+      });
     } catch (error) {
-      // Enhanced error handling
       const errorMessage =
-        error.response?.data?.error || 'An error occurred while adding the todo.';
+        error.response?.data?.error ||
+        "An error occurred while adding the todo.";
       setError(errorMessage);
     }
+  };
+
+  const handleChange = (e) => {
+    setTaskName(e.target.value);
   };
 
   useEffect(() => {
@@ -41,11 +46,13 @@ function AddTodoForm({ setTodos }) {
         <input
           type="text"
           value={taskName}
-          onChange={(e) => setTaskName(e.target.value)}
+          onChange={handleChange}
           placeholder="Add new todo"
           required
         />
-        <button type="submit"><FaPlus /></button>
+        <button type="submit" role="button" aria-label="add todo">
+          <FaPlus />
+        </button>
       </div>
       {error && (
         <p className="error-message" role="alert">
@@ -54,6 +61,4 @@ function AddTodoForm({ setTodos }) {
       )}
     </form>
   );
-}
-
-export default AddTodoForm;
+};
